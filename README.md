@@ -11,20 +11,19 @@ $ ./invasion -n numberOfAliens -file "path-to-custom-map-file"
 ```
 
 ```
-City (Bar) was just been destroyed by alien (Sofia) and alien (Jayden) (in iteration 0)
-City (Oops) was just been destroyed by alien (David) and alien (Emily) (in iteration 0)
-City (Bee) was just been destroyed by alien (Alexander) and alien (Addison) (in iteration 0)
-City (Bar) was just been destroyed by alien (Jayden) and alien (Jayden) (in iteration 0)
-City (Baz) was just been destroyed by alien (Olivia) and alien (Joseph) (in iteration 0)
+City (Bee) was just been destroyed by alien (David) and alien (Emma) (in iteration 0)
+City (Bee) was just been destroyed by alien (Abigail) and alien (Emma) (in iteration 0)
+City (Bee) was just been destroyed by alien (Mason) and alien (Emma) (in iteration 0)
+City (Foo) was just been destroyed by alien (Mason) and alien (Emily) (in iteration 0)
+City (Bar) was just been destroyed by alien (Ava) and alien (Ava) (in iteration 0)
+City (Bar) was just been destroyed by alien (Emily) and alien (Ava) (in iteration 4)
 
 
 +------------+------------------+--------------------------------+
 | ALIEN NAME | CURRENT LOCATION |  CURRENT ITERATION AROUND THE  |
 |            |                  |              MAP               |
 +------------+------------------+--------------------------------+
-| Jayden     | Bar              | 10000th                        |
-| Addison    | Bee              | 10000th                        |
-| Emily      | Oops             | 10000th                        |
+| Ava        | Bar              | 10000th                        |
 +------------+------------------+--------------------------------+
 
 
