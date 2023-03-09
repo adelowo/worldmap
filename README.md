@@ -36,7 +36,7 @@ City (Bar) was just been destroyed by alien (Emily) and alien (Ava) (in iteratio
 
 
 
-### <a name="#challenge"> Challenge </a>
+### <a name="challenge"> Challenge </a>
 
 Mad aliens are about to invade the earth and you are tasked with simulating the invasion.
 
