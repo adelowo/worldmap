@@ -1,0 +1,5 @@
+Foo north=Bar west=Baz south=Qu-ux
+Lagos
+Bar south=Foo west=Bee
+Oops north=Bar east=Foo
+Bee north=Foo east=Baz
