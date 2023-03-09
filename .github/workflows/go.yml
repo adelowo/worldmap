@@ -1,0 +1,44 @@
+name: Build, run all tests
+on: [pull_request]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+
+    steps:
+
+    - name: Get the version
+      id: get_version
+      run: echo ::set-output name=tag::$(echo ${GITHUB_SHA:8})
+
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: ^1.18
+      id: go
+
+    - name: Check out code
+      uses: actions/checkout@v2
+      with:
+        submodules: true
+        token: ${{ secrets.PAT }}
+
+    - name: Cache go modules
+      uses: actions/cache@v1
+      with:
+        path: ~/go/pkg/mod
+        key: ${{ runner.os }}-go-${{ hashFiles('go.sum') }}
+        restore-keys: ${{ runner.os }}-go-
+
+    - name: Get and verify dependencies
+      run: go mod download && go mod verify
+
+    - name: Build app to make sure there are zero issues
+      run: go build -o app ./cmd
+
+    - name: Run all tests
+      run: go test -v ./...
+
