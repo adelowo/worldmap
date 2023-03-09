@@ -21,7 +21,7 @@ func TestRightNumberOfAliensCreated(t *testing.T) {
 
 func TestCityMustHaveAtLeastOneConnection(t *testing.T) {
 
-	_, err := NewMap("testdata/map.txt")
+	_, err := NewMap("testdata/invalidmap.txt")
 	require.Error(t, err)
 
 	require.Equal(t, "a valid city must have at least one connection", err.Error())

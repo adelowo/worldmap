@@ -1,6 +1,7 @@
 ### World map alien invasion
 
 - [Challenge](#challenge)
+- [Benchmarks](#benchmarks)
 
 
 ```sh
@@ -34,6 +35,24 @@ City (Bar) was just been destroyed by alien (Emily) and alien (Ava) (in iteratio
 +-----------+-----------------+
 ```
 
+### <a name="bench"> Benchmarks </a>
+
+```sh
+
+$ go test -bench .
+
+```
+
+```
+
+goos: darwin
+goarch: arm64
+pkg: alien
+BenchmarkNewWorldFileFromReader1000-10            670588              1779 ns/op
+PASS
+ok      alien   3.446
+
+```
 
 
 ### <a name="challenge"> Challenge </a>
