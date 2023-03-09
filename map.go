@@ -79,7 +79,7 @@ func NewWorldWideMapFromReader(f io.Reader) (*WorldWideMap, error) {
 			})
 		}
 
-		city.Name = cityDefinition[0]
+		city.Name = strings.TrimSpace(cityDefinition[0])
 
 		m.AddCity(city)
 	}
