@@ -28,8 +28,9 @@ type Path struct {
 }
 
 type WorldWideMap struct {
-	Cities []*City
-	Aliens []*Alien
+	Cities  []*City
+	Aliens  []*Alien
+	printer Printer
 }
 
 func (m *WorldWideMap) Simulate(numOfAliens int) {
@@ -41,7 +42,7 @@ func (m *WorldWideMap) Simulate(numOfAliens int) {
 	}
 }
 
-func NewMap(f string) (*WorldWideMap, error) {
+func NewMap(f string, printer Printer) (*WorldWideMap, error) {
 
 	fi, err := os.Open(f)
 	if err != nil {
@@ -50,11 +51,13 @@ func NewMap(f string) (*WorldWideMap, error) {
 
 	defer fi.Close()
 
-	return NewWorldWideMapFromReader(fi)
+	return NewWorldWideMapFromReader(fi, printer)
 }
 
-func NewWorldWideMapFromReader(f io.Reader) (*WorldWideMap, error) {
-	m := &WorldWideMap{}
+func NewWorldWideMapFromReader(f io.Reader, printer Printer) (*WorldWideMap, error) {
+	m := &WorldWideMap{
+		printer: printer,
+	}
 
 	// asumption that you could load a 200mb or 1GB file
 	scanner := bufio.NewScanner(f)
@@ -137,7 +140,7 @@ func (m *WorldWideMap) Fight(turn int) {
 		// the second alien here
 		s := fmt.Sprintf("City (%s) was just been destroyed by alien (%s) and alien (%s) (in iteration %d) \n", a.City, a.Name, mapToCheckMultipleAliens[a.City], turn)
 
-		print(s)
+		m.printer.Print(s)
 
 		for _, alien := range m.Aliens {
 			// make sure to kill both aliens

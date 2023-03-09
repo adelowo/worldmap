@@ -11,6 +11,9 @@ $ ./invasion -n numberOfAliens -file "path-to-custom-map-file"
 
 ```
 
+> to disable all outputs to stdout, use the noop printer by passing the -output
+flag. It can be anything
+
 ```
 City (Bee) was just been destroyed by alien (David) and alien (Emma) (in iteration 0)
 City (Bee) was just been destroyed by alien (Abigail) and alien (Emma) (in iteration 0)

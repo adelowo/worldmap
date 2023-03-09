@@ -9,7 +9,7 @@ import (
 
 func TestRightNumberOfAliensCreated(t *testing.T) {
 
-	worldMap, err := NewMap("testdata/map.txt")
+	worldMap, err := NewMap("testdata/map.txt", &NoopPrinter{})
 	require.NoError(t, err)
 
 	require.Len(t, worldMap.Aliens, 0)
@@ -21,7 +21,7 @@ func TestRightNumberOfAliensCreated(t *testing.T) {
 
 func TestCityMustHaveAtLeastOneConnection(t *testing.T) {
 
-	_, err := NewMap("testdata/invalidmap.txt")
+	_, err := NewMap("testdata/invalidmap.txt", &NoopPrinter{})
 	require.Error(t, err)
 
 	require.Equal(t, "a valid city must have at least one connection", err.Error())
@@ -29,7 +29,7 @@ func TestCityMustHaveAtLeastOneConnection(t *testing.T) {
 
 func TestCityCountMustBeCorrect(t *testing.T) {
 
-	worldMap, err := NewMap("testdata/map.txt")
+	worldMap, err := NewMap("testdata/map.txt", &NoopPrinter{})
 	require.NoError(t, err)
 
 	require.Len(t, worldMap.Cities, 4)
@@ -47,7 +47,7 @@ Bee north=Foo east=Baz
 
 		r := strings.NewReader(s)
 
-		_, err := NewWorldWideMapFromReader(r)
+		_, err := NewWorldWideMapFromReader(r, &NoopPrinter{})
 		if err != nil {
 			b.FailNow()
 		}

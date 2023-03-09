@@ -17,6 +17,7 @@ import (
 var (
 	mapFile   string
 	numAliens int
+	printType string
 )
 
 func getDefaultAlienCount() int {
@@ -49,6 +50,7 @@ func main() {
 
 	flag.StringVar(&mapFile, "map", getDefaultFileName(), "file containing the map definition")
 	flag.IntVar(&numAliens, "n", getDefaultAlienCount(), "number of aliens to use in the simulation")
+	flag.StringVar(&printType, "output", "console", "Where should priting go? If console, it goes it stdout. Any other value uses the noop printer")
 
 	flag.Parse()
 
@@ -67,12 +69,25 @@ func main() {
 
 	defer f.Close()
 
-	m, err := alien.NewWorldWideMapFromReader(f)
+	var p alien.Printer
+
+	p = &alien.NoopPrinter{}
+
+	if printType == "console" {
+		p = &alien.StdOutPrinter{}
+	}
+
+	m, err := alien.NewWorldWideMapFromReader(f, p)
 	if err != nil {
 		log.Fatalf("could not create alien map... %v", err)
 	}
 
 	m.Simulate(numAliens)
+
+	if printType != "console" {
+		// exit safely
+		os.Exit(0)
+	}
 
 	fmt.Print("\n \n")
 
