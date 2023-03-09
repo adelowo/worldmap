@@ -7,6 +7,7 @@ import (
 	"log"
 	"math/rand"
 	"os"
+	"strconv"
 	"time"
 
 	"github.com/dustin/go-humanize"
@@ -18,10 +19,36 @@ var (
 	numAliens int
 )
 
+func getDefaultAlienCount() int {
+	d := os.Getenv("ALIEN_COUNT")
+	if len(d) == 0 {
+		return 2
+	}
+
+	dd, err := strconv.Atoi(d)
+	if err != nil {
+		// default
+		return 2
+	}
+
+	return dd
+}
+
+func getDefaultFileName() string {
+	s := os.Getenv("MAP_FILE")
+	if len(s) > 0 {
+		return s
+	}
+
+	return "testdata/map.txt"
+}
+
 func main() {
 
-	flag.StringVar(&mapFile, "map", "testdata/map.txt", "file containing the map definition")
-	flag.IntVar(&numAliens, "n", 2, "number of aliens to use in the simulation")
+	// this cli is too simple to throw in urfave/cli or cobra really
+
+	flag.StringVar(&mapFile, "map", getDefaultFileName(), "file containing the map definition")
+	flag.IntVar(&numAliens, "n", getDefaultAlienCount(), "number of aliens to use in the simulation")
 
 	flag.Parse()
 
